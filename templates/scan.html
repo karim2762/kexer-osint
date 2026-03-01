@@ -6,8 +6,8 @@
 </head>
 <body>
 
-<h1>KEXER OSINT SCAN</h1>
-<p>Target: {{username}}</p>
+<h1 class="scan-title">KEXER OSINT SCAN</h1>
+<p class="target">Target: {{username}}</p>
 
 <div class="progress">
 <div id="bar"></div>
@@ -15,9 +15,13 @@
 
 <div id="terminal" class="terminal"></div>
 
-<a class="report" href="/report/{{username}}">Open Report</a>
+<a class="report" id="reportBtn" href="#">Generating Report...</a>
 
-<script src="/static/scan.js"></script>
+<footer>
+Powered by KEXER Intelligence Engine
+</footer>
+
+<script src="/static/ui.js"></script>
 <script>
 startScan("{{username}}")
 </script>
