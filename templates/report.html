@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>KEXER Report</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>KEXER OSINT REPORT</h1>
+
+<h2>User: {{data.username}}</h2>
+
+<h3>Intelligence</h3>
+<ul>
+<li>Length: {{data.intelligence.length}}</li>
+<li>Numbers: {{data.intelligence.has_numbers}}</li>
+<li>Special Characters: {{data.intelligence.has_special_chars}}</li>
+<li>Possible Birth Year: {{data.intelligence.possible_birth_year}}</li>
+<li>Risk Level: {{data.intelligence.risk_level}}</li>
+</ul>
+
+<h3>Detected Accounts</h3>
+
+<div class="terminal">
+{% for r in data.results %}
+<div>
+{{r.site}} :
+{% if r.status == "FOUND" %}
+<a href="{{r.url}}" target="_blank">FOUND</a>
+{% else %}
+{{r.status}}
+{% endif %}
+</div>
+{% endfor %}
+</div>
+
+</body>
+</html>
