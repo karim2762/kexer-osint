@@ -1,43 +1,134 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KEXER Report</title>
-<link rel="stylesheet" href="/static/style.css">
-<script src="/static/ui.js"></script>
+
+<style>
+body{
+background:#020617;
+color:white;
+font-family:system-ui;
+margin:0;
+}
+
+.container{
+max-width:650px;
+margin:auto;
+padding:18px;
+}
+
+h1{
+text-align:center;
+color:#00ff9c;
+}
+
+.user{
+text-align:center;
+margin-bottom:15px;
+}
+
+.card{
+background:#0f172a;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.counter{
+font-size:18px;
+margin-bottom:10px;
+}
+
+.risk-low{color:#22c55e;}
+.risk-medium{color:#facc15;}
+.risk-high{color:#ef4444;}
+
+.account{
+background:#020617;
+border:1px solid #1f2937;
+padding:12px;
+border-radius:8px;
+margin-bottom:10px;
+}
+
+.open{
+display:block;
+text-align:center;
+background:#00ff9c;
+color:black;
+padding:10px;
+border-radius:8px;
+text-decoration:none;
+margin-top:6px;
+font-weight:600;
+}
+
+footer{
+text-align:center;
+font-size:12px;
+color:#64748b;
+}
+</style>
 </head>
+
 <body>
 
-<h1>KEXER OSINT REPORT</h1>
+<div class="container">
 
-<h2>User: {{data.username}}</h2>
+<h1>KEXER REPORT</h1>
+<div class="user">User: <b>{{data.username}}</b></div>
 
-<h3>Intelligence</h3>
-<ul>
-<li>Length: {{data.intelligence.length}}</li>
-<li>Numbers: {{data.intelligence.has_numbers}}</li>
-<li>Special Characters: {{data.intelligence.has_special_chars}}</li>
-<li>Possible Birth Year: {{data.intelligence.possible_birth_year}}</li>
-<li>Risk Level: {{data.intelligence.risk_level}}</li>
-</ul>
+<div class="card">
+<h3>Username Intelligence</h3>
 
-<h3>Detected Accounts</h3>
+<p>Length: {{data.intelligence.length}}</p>
+<p>Numbers: {{data.intelligence.has_numbers}}</p>
+<p>Special Characters: {{data.intelligence.has_special_chars}}</p>
+<p>Possible Birth Year: {{data.intelligence.possible_birth_year}}</p>
 
-<div class="terminal">
-{% for r in data.results %}
-<div>
-{{r.site}} :
-{% if r.status == "FOUND" %}
-<a href="{{r.url}}" target="_blank">FOUND</a>
-{% else %}
-{{r.status}}
-{% endif %}
+<p>
+Risk Level:
+<span class="
+{% if data.intelligence.risk_level == 'LOW' %}risk-low{% endif %}
+{% if data.intelligence.risk_level == 'MEDIUM' %}risk-medium{% endif %}
+{% if data.intelligence.risk_level == 'HIGH' %}risk-high{% endif %}
+">
+{{data.intelligence.risk_level}}
+</span>
+</p>
+
+</div>
+
+<div class="card">
+
+{% set found_accounts = data.results | selectattr("status","equalto","FOUND") | list %}
+
+<div class="counter">
+Found Accounts: <b>{{found_accounts|length}}</b>
+</div>
+
+{% if found_accounts %}
+{% for r in found_accounts %}
+<div class="account">
+<b>{{r.site}}</b>
+<a href="{{r.url}}" target="_blank" class="open">
+Open Profile
+</a>
 </div>
 {% endfor %}
+{% else %}
+No accounts found.
+{% endif %}
+
 </div>
 
 <footer>
-Thanks for using Kexer OSINT Tool
+Kexer Intelligence Engine
 </footer>
+
+</div>
 
 </body>
 </html>

@@ -1,13 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KEXER Scan</title>
-<link rel="stylesheet" href="/static/style.css">
+
+<style>
+body{
+background:#020617;
+color:white;
+font-family:system-ui;
+margin:0;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+padding:20px;
+}
+
+h1{
+text-align:center;
+color:#00ff9c;
+}
+
+.target{
+text-align:center;
+margin-bottom:10px;
+}
+
+.counter{
+text-align:center;
+font-size:18px;
+margin-bottom:15px;
+}
+
+.progress{
+height:8px;
+background:#1e293b;
+border-radius:10px;
+overflow:hidden;
+margin-bottom:15px;
+}
+
+#bar{
+height:100%;
+width:0%;
+background:#00ff9c;
+transition:0.3s;
+}
+
+.terminal{
+background:#020617;
+border:1px solid #1f2937;
+border-radius:10px;
+padding:12px;
+font-size:14px;
+max-height:300px;
+overflow:auto;
+}
+
+.found{
+color:#00ff9c;
+}
+
+footer{
+text-align:center;
+margin-top:15px;
+font-size:12px;
+color:#64748b;
+}
+
+.report{
+display:none;
+margin-top:15px;
+text-align:center;
+background:#00ff9c;
+padding:12px;
+border-radius:10px;
+color:black;
+text-decoration:none;
+font-weight:700;
+display:block;
+}
+</style>
 </head>
+
 <body>
 
-<h1 class="scan-title">KEXER OSINT SCAN</h1>
+<div class="container">
+
+<h1>KEXER SCAN</h1>
 <p class="target">Target: {{username}}</p>
+
+<div class="counter">
+Found Accounts: <b id="foundCount">0</b>
+</div>
 
 <div class="progress">
 <div id="bar"></div>
@@ -15,11 +103,15 @@
 
 <div id="terminal" class="terminal"></div>
 
-<a class="report" id="reportBtn" href="#">Generating Report...</a>
+<a class="report" id="reportBtn" href="/report/{{username}}">
+View Full Report
+</a>
 
 <footer>
-Powered by KEXER Intelligence Engine
+Scanning social networks...
 </footer>
+
+</div>
 
 <script src="/static/ui.js"></script>
 <script>
