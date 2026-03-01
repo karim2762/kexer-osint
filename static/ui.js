@@ -1,82 +1,51 @@
-// KEXER UI Engine
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    animateLogo();
-    animateBackground();
-    terminalGlow();
-
-});
-
-
-// Logo glow animation
-function animateLogo() {
-    const logo = document.querySelector(".logo");
-    if (!logo) return;
-
-    let glow = 0;
-
-    setInterval(() => {
-        glow = (glow + 1) % 20;
-        logo.style.textShadow =
-            "0 0 " + (10 + glow) + "px #00ffcc, 0 0 " + (20 + glow) + "px #00ffcc";
-    }, 120);
+function typeLine(text) {
+    const terminal = document.getElementById("terminal");
+    const line = document.createElement("div");
+    line.innerText = text;
+    terminal.appendChild(line);
+    terminal.scrollTop = terminal.scrollHeight;
 }
 
+async function startScan(username) {
 
-// Animated cyber background
-function animateBackground() {
+    const bar = document.getElementById("bar");
+    const reportBtn = document.getElementById("reportBtn");
 
-    const body = document.body;
-    let pos = 0;
+    typeLine("Initializing KEXER Intelligence Engine...");
+    typeLine("Target locked: " + username);
+    typeLine("Starting OSINT sweep...");
 
-    setInterval(() => {
-        pos += 0.2;
-        body.style.backgroundPosition = pos + "px " + pos + "px";
-    }, 40);
+    let progress = 0;
 
-}
+    const interval = setInterval(() => {
+        progress += Math.random() * 8;
+        bar.style.width = progress + "%";
+        if (progress >= 100) clearInterval(interval);
+    }, 200);
 
+    const response = await fetch("/api/scan/" + username);
+    const data = await response.json();
 
-// Terminal animation
-function terminalGlow() {
-    const terminal = document.querySelector(".terminal");
-    if (!terminal) return;
+    typeLine("Analyzing username intelligence...");
+    typeLine("Length: " + data.intelligence.length);
+    typeLine("Numbers: " + data.intelligence.has_numbers);
+    typeLine("Risk Level: " + data.intelligence.risk_level);
 
-    let level = 0;
+    typeLine("Scanning social networks...");
 
-    setInterval(() => {
-        level = (level + 1) % 30;
-        terminal.style.boxShadow =
-            "0 0 " + (10 + level) + "px rgba(0,255,200,0.15)";
-    }, 100);
-}
-
-
-// Typing animation (optional use)
-function typeEffect(element, text, speed = 40) {
-    let i = 0;
-
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
+    data.results.forEach(r => {
+        if (r.status === "FOUND") {
+            typeLine("[FOUND] " + r.site + " -> " + r.url);
+        } else {
+            typeLine("[MISS] " + r.site);
         }
-    }
-
-    element.innerHTML = "";
-    type();
-}
-
-
-// Smooth scroll utility
-function smoothScroll(targetId) {
-    const el = document.getElementById(targetId);
-    if (!el) return;
-
-    window.scrollTo({
-        top: el.offsetTop,
-        behavior: "smooth"
     });
+
+    bar.style.width = "100%";
+
+    typeLine("KEXER Scan Complete.");
+    typeLine("Generating intelligence report...");
+
+    reportBtn.innerText = "Open KEXER Report";
+    reportBtn.href = "/report/" + username;
 }
