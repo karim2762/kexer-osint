@@ -1,0 +1,17 @@
+[
+ {"name":"Instagram","url":"https://www.instagram.com/{}"},
+ {"name":"GitHub","url":"https://github.com/{}"},
+ {"name":"TikTok","url":"https://www.tiktok.com/@{}"},
+ {"name":"Reddit","url":"https://www.reddit.com/user/{}"},
+ {"name":"YouTube","url":"https://www.youtube.com/@{}"},
+ {"name":"Pinterest","url":"https://www.pinterest.com/{}"},
+ {"name":"Twitch","url":"https://www.twitch.tv/{}"},
+ {"name":"Medium","url":"https://medium.com/@{}"},
+ {"name":"Facebook","url":"https://www.facebook.com/{}"},
+ {"name":"X","url":"https://x.com/{}"},
+ {"name":"Steam","url":"https://steamcommunity.com/id/{}"},
+ {"name":"SoundCloud","url":"https://soundcloud.com/{}"},
+ {"name":"Vimeo","url":"https://vimeo.com/{}"},
+ {"name":"Behance","url":"https://www.behance.net/{}"},
+ {"name":"DeviantArt","url":"https://www.deviantart.com/{}"}
+]
