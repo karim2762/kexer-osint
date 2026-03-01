@@ -2,93 +2,24 @@
 <html>
 <head>
 <title>KEXER OSINT</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="/static/style.css">
-
-<style>
-/* Extra UI effects */
-
-.grid-bg{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background-image:
-linear-gradient(rgba(0,255,200,0.05) 1px, transparent 1px),
-linear-gradient(90deg, rgba(0,255,200,0.05) 1px, transparent 1px);
-background-size:40px 40px;
-z-index:-1;
-animation: moveGrid 20s linear infinite;
-}
-
-@keyframes moveGrid{
-0%{background-position:0 0;}
-100%{background-position:1000px 1000px;}
-}
-
-.scan-btn{
-transition:0.3s;
-box-shadow:0 0 15px #00ffcc;
-}
-
-.scan-btn:hover{
-transform:scale(1.05);
-box-shadow:0 0 30px #00ffcc;
-}
-
-.main{
-animation: fadeIn 1.2s ease;
-}
-
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(30px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-</style>
-
 </head>
 <body>
 
-<div class="grid-bg"></div>
-
 <div class="main">
-
 <h1 class="logo">KEXER</h1>
-
-<p id="typing" class="tag">
-Extremely Powerful OSINT Scanner
-</p>
+<p class="tag">Extremely Powerful OSINT Scanner</p>
 
 <form action="/scan">
 <input name="username" placeholder="Enter target username" required>
-<button class="scan-btn">Start KEXER Scan</button>
+<button>Start KEXER Scan</button>
 </form>
-
 </div>
 
 <footer>
 Made with Kexer Intelligence Engine<br>
 Thanks for using Kexer OSINT Tool
 </footer>
-
-<script src="/static/ui.js"></script>
-
-<script>
-// typing effect on homepage
-typeEffect(
-document.getElementById("typing"),
-"Extremely Powerful OSINT Scanner"
-);
-</script>
 
 </body>
 </html>
