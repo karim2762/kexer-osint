@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>KEXER Scan</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<h1>KEXER OSINT SCAN</h1>
+<p>Target: {{username}}</p>
+
+<div class="progress">
+<div id="bar"></div>
+</div>
+
+<div id="terminal" class="terminal"></div>
+
+<a class="report" href="/report/{{username}}">Open Report</a>
+
+<script src="/static/scan.js"></script>
+<script>
+startScan("{{username}}")
+</script>
+
+</body>
+</html>
